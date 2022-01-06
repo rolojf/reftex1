@@ -207,105 +207,6 @@ myNav modelo =
                     ]
                 ]
 
-        {- Para cuando haya un menú de auth y según cada perfil
-           myHiddenBlock : Htmls.Html Msg
-           myHiddenBlock =
-               Htmls.div
-                   [ css
-                       [ Tw.hidden
-                       , TwBp.md [ Tw.block ]
-                       ]
-                   ]
-                   [ Htmls.div
-                       [ css
-                           [ Tw.ml_4
-                           , Tw.flex
-                           , Tw.items_center
-                           , TwBp.md [ Tw.ml_6 ]
-                           ]
-                       ]
-                       [ Htmls.div
-                           -- Profile dropdown --
-                           [ css
-                               [ Tw.ml_3
-                               , Tw.relative
-                               ]
-                           ]
-                           [ Htmls.div
-                               []
-                               [ Htmls.button
-                                   [ css
-                                       [ Tw.max_w_xs
-                                       , Tw.bg_gray_800
-                                       , Tw.rounded_full
-                                       , Tw.flex
-                                       , Tw.items_center
-                                       , Tw.text_sm
-                                       , Tw.text_white
-                                       , Css.focus
-                                           [ Tw.outline_none
-                                           , Tw.ring_2
-                                           , Tw.ring_offset_2
-                                           , Tw.ring_offset_gray_800
-                                           , Tw.ring_white
-                                           ]
-                                       ]
-                                   , Attrs.id "user-menu"
-                                   , Aria.ariaHasPopup "true" |> Attrs.fromUnstyled
-                                   , Events.onClick ToggleProfileMenu
-                                   ]
-                                   [ Htmls.span
-                                       [ css [ Tw.sr_only ] ]
-                                       [ Htmls.text "Open user menu" ]
-                                   , Htmls.img
-                                       [ css
-                                           [ Tw.h_8
-                                           , Tw.w_8
-                                           , Tw.rounded_full
-                                           ]
-                                       , Attrs.src "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=g09zpRVLoT&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                       , Attrs.alt ""
-                                       ]
-                                       []
-                                   ]
-                               ]
-                           , if modelo.showProfileMenu then
-                               Htmls.div
-                                   [ css
-                                       [ Tw.origin_top_right
-                                       , Tw.absolute
-                                       , Tw.right_0
-                                       , Tw.mt_2
-                                       , Tw.w_48
-                                       , Tw.rounded_md
-                                       , Tw.shadow_lg
-                                       , Tw.py_1
-                                       , Tw.bg_white
-                                       , Tw.ring_1
-                                       , Tw.ring_black
-                                       , Tw.ring_opacity_5
-                                       ]
-                                   , Aria.role "menu" |> Attrs.fromUnstyled
-
-                                   -- , Aria.aria-orientation "vertical"
-                                   , Aria.ariaLabelledby "user-menu" |> Attrs.fromUnstyled
-                                   ]
-                                   (menuItems
-                                       [ Tw.block
-                                       , Tw.px_4
-                                       , Tw.py_2
-                                       , Tw.text_sm
-                                       , Tw.text_gray_700
-                                       , Css.hover [ Tw.bg_gray_100 ]
-                                       ]
-                                   )
-
-                             else
-                               Htmls.i [] []
-                           ]
-                       ]
-                   ]
-        -}
         myHiddenMenu : Htmls.Html Msg
         myHiddenMenu =
             Htmls.div
@@ -328,56 +229,6 @@ myNav modelo =
                         ]
                     ]
                     (ligasChulas True <| getMenu)
-
-                {- , Htmls.div
-                   [ css
-                       [ Tw.pt_4
-                       , Tw.pb_3
-                       , Tw.border_t
-                       , Tw.border_gray_700
-                       ]
-                   ]
-                   [ Htmls.div
-                       [ css
-                           [ Tw.flex
-                           , Tw.items_center
-                           , Tw.px_5
-                           ]
-                       ]
-                       [ Htmls.div
-                           [ css [ Tw.flex_shrink_0 ] ]
-                           [ Htmls.img
-                               [ css [ Tw.h_10, Tw.w_10, Tw.rounded_full ]
-                               , Attrs.src "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=g09zpRVLoT&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                               , Attrs.alt ""
-                               ]
-                               []
-                           , Htmls.div
-                               [ css [ Tw.ml_3 ] ]
-                               [ Htmls.div
-                                   [ css [ Tw.text_base, Tw.font_medium, Tw.text_white ] ]
-                                   [ Htmls.text "Tom Cook" ]
-                               , Htmls.div
-                                   [ css [ Tw.text_sm, Tw.font_medium, Tw.text_gray_400 ] ]
-                                   [ Htmls.text "tom@example.com" ]
-                               ]
-                           ]
-                       ]
-                -}
-                {- , Htmls.div [ css [ Tw.mt_3, Tw.px_2, Tw.space_y_1 ] ]
-                      (menuItems
-                          [ Tw.block
-                          , Tw.px_3
-                          , Tw.py_2
-                          , Tw.rounded_md
-                          , Tw.text_base
-                          , Tw.font_medium
-                          , Tw.text_gray_400
-                          , Css.hover [ Tw.text_white, Tw.bg_gray_700 ]
-                          ]
-                      )
-                   ]
-                -}
                 ]
 
         ligasChulas :
@@ -424,14 +275,6 @@ myNav modelo =
                     else
                         claseActual ++ claseActualEnDesktop
 
-                {-
-                   else if esParaMovil then
-                       clasesBase ++ claseExtraPaMovil
-
-                   else
-                       clasesBase ++ claseExtraPaDesktop
-                -}
-                -- ligaChula : List Tw.Styles -> TemplateMetadata.Liga -> Html msg
                 ligaChula clases liga =
                     Htmls.a
                         [ Attrs.href liga.direccion
@@ -447,26 +290,6 @@ myNav modelo =
                 )
                 menus
 
-        {- menuItems : List Styles -> List (Html msg)
-           menuItems clases =
-               [ Htmls.a
-                   [ Attrs.href "#"
-                   , css clases
-                   , Aria.role "menuitem" |> Attrs.fromUnstyled
-                   ]
-                   [ Htmls.text "Your Profile" ]
-               , Htmls.a
-                   [ css clases
-                   , Aria.role "menuitem" |> Attrs.fromUnstyled
-                   ]
-                   [ Htmls.text "Settings" ]
-               , Htmls.a
-                   [ css clases
-                   , Aria.role "menuitem" |> Attrs.fromUnstyled
-                   ]
-                   [ Htmls.text "Sign out" ]
-               ]
-        -}
         heroiconOutlineMenu : Htmls.Html Msg
         heroiconOutlineMenu =
             Htmls.div
@@ -474,8 +297,6 @@ myNav modelo =
                     [ Tw.h_6, Tw.w_6, Tw.block ]
                 ]
                 [ svg
-                    -- [ Svg.Attrsibutes.css [h-6 w-6 block"
-                    -- , xmlns="http://www.w3.org/2000/svg"
                     [ SvgAttr.fill "none"
                     , SvgAttr.viewBox "0 0 24 24"
                     , SvgAttr.stroke "currentColor"
@@ -497,8 +318,6 @@ myNav modelo =
             Htmls.div
                 [ css [ Tw.h_6, Tw.w_6, Tw.block ] ]
                 [ svg
-                    -- Svg.Attrsibutes.css [h-6 w-6 block"
-                    -- xmlns="http://www.w3.org/2000/svg"
                     [ SvgAttr.fill "none"
                     , SvgAttr.viewBox "0 0 24 24"
                     , SvgAttr.stroke "currentColor"
