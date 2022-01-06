@@ -3,7 +3,6 @@ module Footer exposing (..)
 import HeroIcons
 import Html as Html exposing (Html, div, text)
 import Html.Attributes as Attr exposing (class)
-import Html.Events as Event
 
 
 ligaAlPie : String -> String -> Html msg
