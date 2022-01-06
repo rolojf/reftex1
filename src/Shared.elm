@@ -16,8 +16,8 @@ import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
 import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
-import Svg exposing (path, svg)
-import Svg.Attributes
+import Svg.Styled exposing (path, svg)
+import Svg.Styled.Attributes as SvgAttr
 import Tailwind.Breakpoints as TwBp
 import Tailwind.Utilities as Tw
 import View exposing (View)
@@ -472,21 +472,20 @@ myNav modelo =
                 [ svg
                     -- [ Svg.Attrsibutes.css [h-6 w-6 block"
                     -- , xmlns="http://www.w3.org/2000/svg"
-                    [ Svg.Attributes.fill "none"
-                    , Svg.Attributes.viewBox "0 0 24 24"
-                    , Svg.Attributes.stroke "currentColor"
+                    [ SvgAttr.fill "none"
+                    , SvgAttr.viewBox "0 0 24 24"
+                    , SvgAttr.stroke "currentColor"
 
                     -- aria-hidden="true"
                     ]
-                    [ Svg.path
-                        [ Svg.Attributes.strokeLinecap "round"
-                        , Svg.Attributes.strokeLinejoin "round"
-                        , Svg.Attributes.strokeWidth "2"
-                        , Svg.Attributes.d "M4 6h16M4 12h16M4 18h16"
+                    [ path
+                        [ SvgAttr.strokeLinecap "round"
+                        , SvgAttr.strokeLinejoin "round"
+                        , SvgAttr.strokeWidth "2"
+                        , SvgAttr.d "M4 6h16M4 12h16M4 18h16"
                         ]
                         []
                     ]
-                    |> Htmls.fromUnstyled
                 ]
 
         heroiconOutlineX : Htmls.Html Msg
@@ -496,21 +495,20 @@ myNav modelo =
                 [ svg
                     -- Svg.Attrsibutes.css [h-6 w-6 block"
                     -- xmlns="http://www.w3.org/2000/svg"
-                    [ Svg.Attributes.fill "none"
-                    , Svg.Attributes.viewBox "0 0 24 24"
-                    , Svg.Attributes.stroke "currentColor"
+                    [ SvgAttr.fill "none"
+                    , SvgAttr.viewBox "0 0 24 24"
+                    , SvgAttr.stroke "currentColor"
 
                     -- aria-hidden="true"
                     ]
                     [ path
-                        [ Svg.Attributes.strokeLinecap "round"
-                        , Svg.Attributes.strokeLinejoin "round"
-                        , Svg.Attributes.strokeWidth "2"
-                        , Svg.Attributes.d "M6 18L18 6M6 6l12 12"
+                        [ SvgAttr.strokeLinecap "round"
+                        , SvgAttr.strokeLinejoin "round"
+                        , SvgAttr.strokeWidth "2"
+                        , SvgAttr.d "M6 18L18 6M6 6l12 12"
                         ]
                         []
                     ]
-                    |> Htmls.fromUnstyled
                 ]
 
         mobileMenuButton : Htmls.Html Msg
@@ -547,8 +545,10 @@ myNav modelo =
                     ]
                     [ Htmls.span
                         [ css [ Tw.sr_only ] ]
-                        [ Htmls.text "Open main menu"
-                        , if modelo.showMobileMenu then
+                        [ Htmls.text "Open main menu" ]
+                    , Htmls.span
+                        []
+                        [ if modelo.showMobileMenu then
                             heroiconOutlineX
 
                           else
