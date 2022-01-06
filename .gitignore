@@ -1,2 +1,9 @@
-/.elm-pages/
-/node_modules/
+node_modules/
+elm-stuff/
+dist/
+.elm-pages/
+functions/render/elm-pages-cli.js
+/.idea/
+/public/tailwind.css
+/.vscode/
+public/tailwind.css

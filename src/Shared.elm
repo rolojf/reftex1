@@ -2,7 +2,10 @@ module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
 import Browser.Navigation
 import DataSource
-import Html exposing (Html)
+import Footer
+import Html as Html exposing (Html, div, text)
+import Html.Attributes as Attr exposing (class)
+import Html.Events as Event
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
@@ -95,6 +98,33 @@ view :
     -> View msg
     -> { body : Html msg, title : String }
 view sharedData page model toMsg pageView =
-    { body = Html.div [] pageView.body
+    { body = div [] (List.append pageView.body [ indexViewFooter ])
     , title = pageView.title
     }
+
+
+indexViewFooter : Html msg
+indexViewFooter =
+    let
+        viewPieNavega : List (Html msg)
+        viewPieNavega =
+            [ Footer.ligaAlPie "#" "About"
+            , Footer.ligaAlPie "#" "Blog"
+            , Footer.ligaAlPie "#" "Jobs"
+            , Footer.ligaAlPie "#" "Press"
+            , Footer.ligaAlPie "#" "Accesibility"
+            , Footer.ligaAlPie "#" "Partners"
+            ]
+
+        viewPieSocialIcons : List (Html msg)
+        viewPieSocialIcons =
+            [ Footer.ligaIcono "github.com" "GitHub" Footer.Github
+            , Footer.ligaIcono "linkedin.com" "LinkedIn" Footer.LinkedIn
+            , Footer.ligaIcono "whatsapp.com" "Whatsapp" Footer.WhatsApp
+            , Footer.ligaIcono "correo.com" "Correo" Footer.Email
+            ]
+    in
+    Footer.viewFooter
+        viewPieNavega
+        viewPieSocialIcons
+        "REFTEX INGENIERIA, S.A. de C.V. - 2021"
