@@ -4,6 +4,8 @@ import DataSource exposing (DataSource)
 import DataSource.Glob as Glob
 import Head
 import Head.Seo as Seo
+import Html as Html exposing (Html, div, text)
+import Html.Attributes as Attr exposing (class)
 import Page exposing (Page, PageWithState, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
@@ -77,4 +79,11 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    View.placeholder <| "Tab_" ++ static.routeParams.tab
+    { title = "Componente Revisado"
+    , body = [ text ("Tab_" ++ static.routeParams.tab) ]
+    , menu =
+        [ View.Liga "#aaa" "AAA"
+        , View.Liga "#bbb" "BBB"
+        , View.Liga "#ccc" "CCC"
+        ]
+    }

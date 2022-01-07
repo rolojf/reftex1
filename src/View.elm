@@ -1,11 +1,18 @@
-module View exposing (View, map, placeholder)
+module View exposing (Liga, View, map, placeholder)
 
-import Html exposing (Html)
+import Html
+
+
+type alias Liga =
+    { direccion : String
+    , queDice : String
+    }
 
 
 type alias View msg =
     { title : String
-    , body : List (Html msg)
+    , body : List (Html.Html msg)
+    , menu : List Liga
     }
 
 
@@ -13,6 +20,7 @@ map : (msg1 -> msg2) -> View msg1 -> View msg2
 map fn doc =
     { title = doc.title
     , body = List.map (Html.map fn) doc.body
+    , menu = doc.menu
     }
 
 
@@ -20,4 +28,5 @@ placeholder : String -> View msg
 placeholder moduleName =
     { title = "Placeholder - " ++ moduleName
     , body = [ Html.text moduleName ]
+    , menu = []
     }

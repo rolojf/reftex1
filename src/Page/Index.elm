@@ -3,6 +3,8 @@ module Page.Index exposing (Data, Model, Msg, page)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
+import Html as Html exposing (Html, div, text)
+import Html.Attributes as Attr exposing (class)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
@@ -66,4 +68,11 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    View.placeholder "Index"
+    { title = "Listado Matón"
+    , body = [ text "Vemamos luego que texto ponemos aquí" ]
+    , menu =
+        [ View.Liga "#one" "uno"
+        , View.Liga "#two" "dos"
+        , View.Liga "#three" "tres"
+        ]
+    }

@@ -121,7 +121,7 @@ view sharedData page model toMsg pageView =
     { body =
         div
             []
-            ((myNav model
+            ((myNav model pageView.menu
                 |> Htmls.toUnstyled
                 |> Html.map toMsg
              )
@@ -160,24 +160,12 @@ indexViewFooter =
         "REFTEX INGENIERIA, S.A. de C.V. - 2021"
 
 
-type alias Liga =
-    { direccion : String
-    , queDice : String
-    }
-
-
 myNav :
     Model
+    -> List View.Liga
     -> Htmls.Html Msg
-myNav modelo =
+myNav modelo getMenu =
     let
-        getMenu : List Liga
-        getMenu =
-            [ Liga "#one" "uno"
-            , Liga "#two" "dos"
-            , Liga "#three" "tres"
-            ]
-
         myLogoAndLinks : Htmls.Html Msg
         myLogoAndLinks =
             Htmls.div
@@ -233,7 +221,7 @@ myNav modelo =
 
         ligasChulas :
             Bool
-            -> List Liga
+            -> List View.Liga
             -> List (Htmls.Html Msg)
         ligasChulas esMovil menus =
             let
