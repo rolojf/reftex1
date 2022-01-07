@@ -42,22 +42,22 @@ data =
     let
         fnJalaElMDyConv : Folders.Reporte -> DataSource Entry
         fnJalaElMDyConv { slug, filePath } =
-            File.bodyWithFrontmatter
+            File.onlyFrontmatter
                 mdDecoder
                 filePath
                 |> DataSource.map
                     (fnConvMDaEntry slug)
 
-        mdDecoder : String -> Decoder { title : String, body : String }
-        mdDecoder body =
-            Decode.map (\title -> { title = title, body = body })
+        mdDecoder : Decoder { title : String }
+        mdDecoder =
+            Decode.map
+                (\title -> { title = title })
                 (Decode.field "title" Decode.string)
 
-        fnConvMDaEntry : String -> { title : String, body : String } -> Entry
-        fnConvMDaEntry slug { title, body } =
+        fnConvMDaEntry : String -> { title : String } -> Entry
+        fnConvMDaEntry slug { title } =
             { title = title
             , route = Route.Tab_ { tab = slug }
-            , excerpt = String.left 80 body ++ "..."
             }
     in
     Folders.all
@@ -95,7 +95,6 @@ type alias Data =
 type alias Entry =
     { title : String
     , route : Route
-    , excerpt : String
     }
 
 
