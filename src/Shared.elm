@@ -400,8 +400,6 @@ myNav modelo =
                     ]
                 ]
                 [ myLogoAndLinks
-
-                --, myHiddenBlock
                 , mobileMenuButton
                 ]
             ]
