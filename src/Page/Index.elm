@@ -39,29 +39,33 @@ page =
 
 data : DataSource Data
 data =
+    let
+        fnJalaElMDyConv : Folders.Reporte -> DataSource Entry
+        fnJalaElMDyConv { slug, filePath } =
+            File.bodyWithFrontmatter
+                mdDecoder
+                filePath
+                |> DataSource.map
+                    (fnConvMDaEntry slug)
+
+        mdDecoder : String -> Decoder { title : String, body : String }
+        mdDecoder body =
+            Decode.map (\title -> { title = title, body = body })
+                (Decode.field "title" Decode.string)
+
+        fnConvMDaEntry : String -> { title : String, body : String } -> Entry
+        fnConvMDaEntry slug { title, body } =
+            { title = title
+            , route = Route.Tab_ { tab = slug }
+            , excerpt = String.left 80 body ++ "..."
+            }
+    in
     Folders.all
         |> DataSource.andThen
             (List.map
-                (\{ slug, filePath } ->
-                    File.bodyWithFrontmatter
-                        blogPostDecoder
-                        filePath
-                        |> DataSource.map
-                            (\{ title, body } ->
-                                { title = title
-                                , route = Route.Tab_ { tab = slug }
-                                , excerpt = String.left 80 body ++ "..."
-                                }
-                            )
-                )
+                fnJalaElMDyConv
                 >> DataSource.combine
             )
-
-
-blogPostDecoder : String -> Decoder { title : String, body : String }
-blogPostDecoder body =
-    Decode.map (\title -> { title = title, body = body })
-        (Decode.field "title" Decode.string)
 
 
 head :
