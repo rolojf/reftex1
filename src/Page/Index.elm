@@ -60,12 +60,22 @@ data =
             , route = Route.Tab_ { tab = slug }
             }
     in
-    Folders.all
-        |> DataSource.andThen
-            (List.map
-                fnJalaElMDyConv
-                >> DataSource.combine
+    DataSource.map2
+        Tuple.pair
+        (DataSource.succeed
+            (div
+                []
+                []
+                |> Html.map never
             )
+        )
+        (Folders.all
+            |> DataSource.andThen
+                (List.map
+                    fnJalaElMDyConv
+                    >> DataSource.combine
+                )
+        )
 
 
 head :
@@ -89,7 +99,7 @@ head static =
 
 
 type alias Data =
-    List Entry
+    ( Html Never, List Entry )
 
 
 type alias Entry =
@@ -105,7 +115,7 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     { title = "Listado Matón"
-    , body = List.map viewEntry static.data
+    , body = List.map viewEntry <| Tuple.second static.data
     , menu =
         [ View.Liga "#one" "uno"
         , View.Liga "#two" "dos"
