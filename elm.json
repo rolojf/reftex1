@@ -7,6 +7,7 @@
     "elm-version": "0.19.1",
     "dependencies": {
         "direct": {
+            "dillonkearns/elm-markdown": "7.0.0",
             "dillonkearns/elm-pages": "9.0.0",
             "dzuk-mutant/elm-html-styled-aria": "1.0.1",
             "elm/browser": "1.0.2",

@@ -7,6 +7,8 @@ import Head
 import Head.Seo as Seo
 import Html as Html exposing (Html, div, text)
 import Html.Attributes as Attr exposing (class)
+import Markdown.Parser
+import Markdown.Renderer exposing (defaultHtmlRenderer)
 import OptimizedDecoder as Decode exposing (Decoder)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
@@ -59,15 +61,38 @@ data =
             { title = title
             , route = Route.Tab_ { tab = slug }
             }
+
+        deadEndsToString deadEnds =
+            deadEnds
+                |> List.map Markdown.Parser.deadEndToString
+                |> String.join "\n"
+
+        renderer markdown =
+            Html.div
+                []
+                [ case
+                    markdown
+                        |> Markdown.Parser.parse
+                        |> Result.mapError deadEndsToString
+                        |> Result.andThen
+                            (\ast ->
+                                Markdown.Renderer.render
+                                    defaultHtmlRenderer
+                                    ast
+                            )
+                  of
+                    Ok rendereado ->
+                        div [] rendereado
+
+                    Err errors ->
+                        text errors
+                ]
     in
     DataSource.map2
         Tuple.pair
-        (DataSource.succeed
-            (div
-                []
-                []
-                |> Html.map never
-            )
+        ("data/index.md"
+            |> File.bodyWithoutFrontmatter
+            |> DataSource.map renderer
         )
         (Folders.all
             |> DataSource.andThen
@@ -115,7 +140,10 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     { title = "Listado Matón"
-    , body = List.map viewEntry <| Tuple.second static.data
+    , body =
+        [ Tuple.first static.data
+        , Html.div [] <| List.map viewEntry <| Tuple.second static.data
+        ]
     , menu =
         [ View.Liga "#one" "uno"
         , View.Liga "#two" "dos"
