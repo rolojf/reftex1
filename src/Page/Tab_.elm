@@ -2,6 +2,7 @@ module Page.Tab_ exposing (Data, Model, Msg, page)
 
 import DataSource exposing (DataSource)
 import DataSource.Glob as Glob
+import Folders
 import Head
 import Head.Seo as Seo
 import Html as Html exposing (Html, div, text)
@@ -37,11 +38,20 @@ page =
 
 routes : DataSource (List RouteParams)
 routes =
-    Glob.succeed RouteParams
-        |> Glob.match (Glob.literal "data/")
-        |> Glob.capture Glob.wildcard
-        |> Glob.match (Glob.literal "/notas.md")
-        |> Glob.toDataSource
+    DataSource.map
+        (List.map
+            (\reporte -> RouteParams reporte.slug)
+        )
+        Folders.all
+
+
+
+{- Glob.succeed RouteParams
+   |> Glob.match (Glob.literal "data/")
+   |> Glob.capture Glob.wildcard
+   |> Glob.match (Glob.literal "/notas.md")
+   |> Glob.toDataSource
+-}
 
 
 data : RouteParams -> DataSource Data

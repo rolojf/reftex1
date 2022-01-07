@@ -1,13 +1,17 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
 import DataSource exposing (DataSource)
+import DataSource.File as File
+import Folders
 import Head
 import Head.Seo as Seo
 import Html as Html exposing (Html, div, text)
 import Html.Attributes as Attr exposing (class)
+import OptimizedDecoder as Decode exposing (Decoder)
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
+import Route exposing (Route)
 import Shared
 import View exposing (View)
 
@@ -35,7 +39,29 @@ page =
 
 data : DataSource Data
 data =
-    DataSource.succeed ()
+    Folders.all
+        |> DataSource.andThen
+            (List.map
+                (\{ slug, filePath } ->
+                    File.bodyWithFrontmatter
+                        blogPostDecoder
+                        filePath
+                        |> DataSource.map
+                            (\{ title, body } ->
+                                { title = title
+                                , route = Route.Tab_ { tab = slug }
+                                , excerpt = String.left 80 body ++ "..."
+                                }
+                            )
+                )
+                >> DataSource.combine
+            )
+
+
+blogPostDecoder : String -> Decoder { title : String, body : String }
+blogPostDecoder body =
+    Decode.map (\title -> { title = title, body = body })
+        (Decode.field "title" Decode.string)
 
 
 head :
@@ -59,7 +85,14 @@ head static =
 
 
 type alias Data =
-    ()
+    List Entry
+
+
+type alias Entry =
+    { title : String
+    , route : Route
+    , excerpt : String
+    }
 
 
 view :
@@ -69,10 +102,16 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     { title = "Listado Matón"
-    , body = [ text "Vemamos luego que texto ponemos aquí" ]
+    , body = List.map viewEntry static.data
     , menu =
         [ View.Liga "#one" "uno"
         , View.Liga "#two" "dos"
         , View.Liga "#three" "tres"
         ]
     }
+
+
+viewEntry : Entry -> Html msg
+viewEntry entry =
+    Html.article []
+        [ Route.link entry.route [] [ Html.text entry.title ] ]
