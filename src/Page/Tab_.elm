@@ -1,12 +1,15 @@
 module Page.Tab_ exposing (Data, Model, Msg, page)
 
 import DataSource exposing (DataSource)
+import DataSource.File as File
 import DataSource.Glob as Glob
 import Folders
 import Head
 import Head.Seo as Seo
 import Html as Html exposing (Html, div, text)
 import Html.Attributes as Attr exposing (class)
+import MdConverter
+import OptimizedDecoder as Decode exposing (Decoder)
 import Page exposing (Page, PageWithState, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
@@ -45,18 +48,27 @@ routes =
         Folders.all
 
 
-
-{- Glob.succeed RouteParams
-   |> Glob.match (Glob.literal "data/")
-   |> Glob.capture Glob.wildcard
-   |> Glob.match (Glob.literal "/notas.md")
-   |> Glob.toDataSource
--}
-
-
 data : RouteParams -> DataSource Data
 data routeParams =
-    DataSource.succeed ()
+    let
+        mdyBDecoder : String -> Decoder { body : String, title : String }
+        mdyBDecoder cuerpo =
+            Decode.map
+                (\title -> { body = cuerpo, title = title })
+                (Decode.field "title" Decode.string)
+    in
+    ("data/" ++ routeParams.tab ++ "/notas.md")
+        |> File.bodyWithFrontmatter mdyBDecoder
+        |> DataSource.map
+            (\{ body, title } ->
+                { body = MdConverter.renderea body
+                , title = title
+                }
+            )
+
+
+type alias Data =
+    { body : Html Never, title : String }
 
 
 head :
@@ -79,10 +91,6 @@ head static =
         |> Seo.website
 
 
-type alias Data =
-    ()
-
-
 view :
     Maybe PageUrl
     -> Shared.Model
@@ -90,7 +98,10 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     { title = "Componente Revisado"
-    , body = [ text ("Tab_" ++ static.routeParams.tab) ]
+    , body =
+        [ static.data.body
+        , text ("Tab_" ++ static.routeParams.tab)
+        ]
     , menu =
         [ View.Liga "#aaa" "AAA"
         , View.Liga "#bbb" "BBB"
