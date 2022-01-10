@@ -115,13 +115,10 @@ view maybeUrl sharedModel static =
     { title = "Listado Matón"
     , body =
         [ Tuple.first static.data
-        , div [] <| List.map viewEntry <| Tuple.second static.data
+        , div [ class "pt-10"] <| List.map viewEntry <| Tuple.second static.data
         ]
     , menu =
-        [ View.Liga "#one" "uno"
-        , View.Liga "#two" "dos"
-        , View.Liga "#three" "tres"
-        ]
+        [ ]
     }
 
 

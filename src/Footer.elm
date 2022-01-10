@@ -74,7 +74,7 @@ Así el footer queda desacoplado de sus ligas e íconos que se establecen en cad
 viewFooter : List (Html msg) -> List (Html msg) -> String -> Html msg
 viewFooter ligasNav icons2show copyR =
     Html.footer
-        []
+        [ class "pt-10"]
         [ div
             [ class "bg-white" ]
             -- "py-4"

@@ -14,6 +14,7 @@ import OptimizedDecoder as Decode exposing (Decoder)
 import Page exposing (Page, PageWithState, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
+import Route
 import Shared
 import View exposing (View)
 
@@ -60,28 +61,28 @@ data routeParams =
 
         getDataFromMD =
             ("data/" ++ routeParams.tab ++ "/notas.md")
-                                |> File.bodyWithFrontmatter mdyBDecoder
-                                |> DataSource.map
-                                    (\{ body, title } ->
-                                        { body = MdConverter.renderea body
-                                        , title = title}
-                                    )
+                |> File.bodyWithFrontmatter mdyBDecoder
+                |> DataSource.map
+                    (\{ body, title } ->
+                        { body = MdConverter.renderea body
+                        , title = title
+                        }
+                    )
 
         getReportes =
-              DataSource.map
-                  Array.fromList
-                  Folders.all
-                  --                     (List.sortBy .slug)
+            DataSource.map
+                Array.fromList
+                Folders.all
 
-
+        --                     (List.sortBy .slug)
     in
     DataSource.map2
-       (\{body, title} reportes ->
-          { body = body
-          , title = title
-          , tabs = reportes
-          }
-       )
+        (\{ body, title } reportes ->
+            { body = body
+            , title = title
+            , tabs = reportes
+            }
+        )
         getDataFromMD
         getReportes
 
@@ -117,45 +118,61 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     let
-        fnIndexo0 : String -> Array Folders.Reporte -> Array Int
-        fnIndexo0 actual reportes =
-            reportes
+        indiceActual : Int
+        indiceActual =
+            static.data.tabs
                 |> Array.indexedMap
                     (\indice { slug } ->
-                        if slug == actual then
+                        if slug == static.routeParams.tab then
                             indice
 
                         else
                             0
                     )
-    --            |> Array.foldl (+) 0
+                |> Array.foldl (+) 0
+
+        indToSlug : Int -> String
+        indToSlug ind =
+            static.data.tabs
+                |> Array.get ind
+                |> Maybe.map .slug
+                |> Maybe.withDefault "error"
+
+        nextInd : Int
+        nextInd =
+            if indiceActual >= Array.length static.data.tabs - 1 then
+                0
+
+            else
+                indiceActual + 1
+
+        prevInd : Int
+        prevInd =
+            if indiceActual <= 0 then
+                Array.length static.data.tabs - 1
+
+            else
+                indiceActual - 1
     in
     { title = "Componente Revisado"
     , body =
         [ static.data.body
         , text ("Tab_" ++ static.routeParams.tab)
-        , static.data.tabs
-            |> fnIndexo0 static.routeParams.tab
+        , indiceActual
             |> Debug.toString
             |> text
             |> List.singleton
             |> div []
-
-
-        {-static.data.tabs
-            |> DataSource.map
-                (fnIndexo0 static.routeParams.tab)
-            |> DataSource.map Debug.toString
-            |> DataSource.map List.singleton
-            |> DataSource.map (\veamos -> div [] veamos)-}
-
-
-
-
         ]
     , menu =
-        [ View.Liga "#aaa" "AAA"
-        , View.Liga "#bbb" "BBB"
-        , View.Liga "#ccc" "CCC"
+        [ View.Liga
+            Route.Index
+            "Inicio"
+        , View.Liga
+            (Route.Tab_ { tab = indToSlug prevInd })
+            ("Previo: " ++ indToSlug prevInd)
+        , View.Liga
+            (Route.Tab_ { tab = indToSlug nextInd })
+            ("Siguiente: " ++ indToSlug nextInd)
         ]
     }

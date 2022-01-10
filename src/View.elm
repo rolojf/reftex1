@@ -1,10 +1,11 @@
 module View exposing (Liga, View, map, placeholder)
 
 import Html
+import Route
 
 
 type alias Liga =
-    { direccion : String
+    { direccion : Route.Route
     , queDice : String
     }
 

@@ -125,9 +125,10 @@ view sharedData page model toMsg pageView =
                 |> Htmls.toUnstyled
                 |> Html.map toMsg
              )
-                :: List.append
+                :: div
+                    [class "container pl-2 md:pl-6 lg:pl-10 prose lg:prose-xl"]
                     pageView.body
-                    [ indexViewFooter ]
+                :: [ indexViewFooter ]
             )
     , title = pageView.title
     }
@@ -226,49 +227,36 @@ myNav modelo getMenu =
         ligasChulas esMovil menus =
             let
                 clasesBase =
-                    [ Tw.text_gray_300
-                    , Css.hover [ Tw.bg_gray_700, Tw.text_white ]
-                    , Tw.px_3
-                    , Tw.py_2
-                    , Tw.rounded_md
-                    , Tw.font_medium
-                    ]
+                    "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
 
                 claseActual =
-                    [ Tw.bg_gray_900
-                    , Tw.text_white
-                    , Tw.px_3
-                    , Tw.py_2
-                    , Tw.rounded_md
-                    , Tw.font_medium
-                    ]
+                    "bg-gray-900 text-white px-3 py-2 rounded-md font-medium"
 
                 claseActualEnMovil =
-                    [ Tw.block, Tw.text_base ]
+                    "block text-base"
 
                 claseActualEnDesktop =
-                    [ Tw.text_sm ]
+                    "text-sm"
 
                 claseExtraPaMovil =
-                    [ Tw.block, Tw.text_base ]
+                    "block text-base"
 
                 claseExtraPaDesktop =
-                    [ Tw.text_sm ]
+                    "text-sm"
 
                 clasesQueVan esParaMovil liga =
-                    -- if PagePath.toString page.path == liga.direccion then
                     if esParaMovil then
-                        claseActual ++ claseActualEnMovil
+                        claseActual ++ " " ++ claseActualEnMovil
 
                     else
-                        claseActual ++ claseActualEnDesktop
+                        claseActual ++ " " ++ claseActualEnDesktop
 
                 ligaChula clases liga =
-                    Htmls.a
-                        [ Attrs.href liga.direccion
-                        , css clases
-                        ]
-                        [ Htmls.text liga.queDice ]
+                    Route.link
+                        liga.direccion
+                        [ class clases ]
+                        [ Html.text liga.queDice ]
+                        |> Htmls.fromUnstyled
             in
             List.map
                 (\algoDelMenu ->
