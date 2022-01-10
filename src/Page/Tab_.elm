@@ -1,5 +1,6 @@
 module Page.Tab_ exposing (Data, Model, Msg, page)
 
+import Array exposing (Array)
 import DataSource exposing (DataSource)
 import DataSource.File as File
 import DataSource.Glob as Glob
@@ -41,11 +42,11 @@ page =
 
 routes : DataSource (List RouteParams)
 routes =
-    DataSource.map
-        (List.map
-            (\reporte -> RouteParams reporte.slug)
-        )
-        Folders.all
+    Folders.all
+        |> DataSource.map
+            (List.map
+                (\reporte -> RouteParams reporte.slug)
+            )
 
 
 data : RouteParams -> DataSource Data
@@ -56,19 +57,37 @@ data routeParams =
             Decode.map
                 (\title -> { body = cuerpo, title = title })
                 (Decode.field "title" Decode.string)
+
+        getDataFromMD =
+            ("data/" ++ routeParams.tab ++ "/notas.md")
+                                |> File.bodyWithFrontmatter mdyBDecoder
+                                |> DataSource.map
+                                    (\{ body, title } ->
+                                        { body = MdConverter.renderea body
+                                        , title = title}
+                                    )
+
+        getReportes =
+              DataSource.map
+                  Array.fromList
+                  Folders.all
+                  --                     (List.sortBy .slug)
+
+
     in
-    ("data/" ++ routeParams.tab ++ "/notas.md")
-        |> File.bodyWithFrontmatter mdyBDecoder
-        |> DataSource.map
-            (\{ body, title } ->
-                { body = MdConverter.renderea body
-                , title = title
-                }
-            )
+    DataSource.map2
+       (\{body, title} reportes ->
+          { body = body
+          , title = title
+          , tabs = reportes
+          }
+       )
+        getDataFromMD
+        getReportes
 
 
 type alias Data =
-    { body : Html Never, title : String }
+    { body : Html Never, title : String, tabs : Array Folders.Reporte }
 
 
 head :
@@ -97,10 +116,42 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
+    let
+        fnIndexo0 : String -> Array Folders.Reporte -> Array Int
+        fnIndexo0 actual reportes =
+            reportes
+                |> Array.indexedMap
+                    (\indice { slug } ->
+                        if slug == actual then
+                            indice
+
+                        else
+                            0
+                    )
+    --            |> Array.foldl (+) 0
+    in
     { title = "Componente Revisado"
     , body =
         [ static.data.body
         , text ("Tab_" ++ static.routeParams.tab)
+        , static.data.tabs
+            |> fnIndexo0 static.routeParams.tab
+            |> Debug.toString
+            |> text
+            |> List.singleton
+            |> div []
+
+
+        {-static.data.tabs
+            |> DataSource.map
+                (fnIndexo0 static.routeParams.tab)
+            |> DataSource.map Debug.toString
+            |> DataSource.map List.singleton
+            |> DataSource.map (\veamos -> div [] veamos)-}
+
+
+
+
         ]
     , menu =
         [ View.Liga "#aaa" "AAA"
