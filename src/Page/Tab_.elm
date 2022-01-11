@@ -49,46 +49,38 @@ routes =
                 (\reporte -> RouteParams reporte.slug)
             )
 
+type alias BodyAndFrontMatter =
+             { body: Html Never, title : String, fotos: Int, apunte: Bool }
 
 data : RouteParams -> DataSource Data
 data routeParams =
     let
-        mdyBDecoder : String -> Decoder { body : String, title : String }
+        -- mdyBDecoder : String -> Decoder FrontMatter
         mdyBDecoder cuerpo =
-            Decode.map
-                (\title -> { body = cuerpo, title = title })
+            Decode.map3 (BodyAndFrontMatter (MdConverter.renderea cuerpo ))
                 (Decode.field "title" Decode.string)
+                (Decode.field "foto" Decode.int)
+                (Decode.field "apunte" Decode.bool)
 
         getDataFromMD =
             ("data/" ++ routeParams.tab ++ "/notas.md")
                 |> File.bodyWithFrontmatter mdyBDecoder
-                |> DataSource.map
-                    (\{ body, title } ->
-                        { body = MdConverter.renderea body
-                        , title = title
-                        }
-                    )
 
         getReportes =
-            DataSource.map
+              DataSource.map
                 Array.fromList
                 Folders.all
 
         --                     (List.sortBy .slug)
     in
-    DataSource.map2
-        (\{ body, title } reportes ->
-            { body = body
-            , title = title
-            , tabs = reportes
-            }
-        )
+    DataSource.map2 Data
         getDataFromMD
         getReportes
 
 
 type alias Data =
-    { body : Html Never, title : String, tabs : Array Folders.Reporte }
+    { fMatter: BodyAndFrontMatter
+    , tabs : Array Folders.Reporte }
 
 
 head :
@@ -156,7 +148,7 @@ view maybeUrl sharedModel static =
     in
     { title = "Componente Revisado"
     , body =
-        [ static.data.body
+        [ static.data.fMatter.body
         , text ("Tab_" ++ static.routeParams.tab)
         , indiceActual
             |> Debug.toString
