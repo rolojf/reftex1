@@ -1,8 +1,21 @@
 ---
 title: Índice
 ---
-## Este texto es el título
+## Servicio de Revisión Eléctrica
 
-Veamos pues *como* se _compone_ __esto__.
+### Alcance
 
-RF
+Revisión de centros de carga eléctricos, interruptores generales y cableado de conducción eléctrica en las instalaciones.  
+
+### Objetivo
+Detectar oportunidades de mejora y detectar riesgos de corto eléctrico por mitigar (por ejemplo, cables quemados por sobre corriente, puntos calientes por empates inseguros de cableado,etc).
+
+### Servicios adicionales incluidos
+Incluye limpieza de contactos y ajuste de contactores.
+Reporte con los hallazgos.  Este es el reporte.
+
+### Otros
+**Fecha del Servicio:**  Diciembre 2021
+
+
+[Cotización Original](./CotizJServ-Elec1.pdf "Va pues")

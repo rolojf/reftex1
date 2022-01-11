@@ -126,7 +126,7 @@ view sharedData page model toMsg pageView =
                 |> Html.map toMsg
              )
                 :: div
-                    [class "container pl-2 md:pl-6 lg:pl-10 prose lg:prose-xl"]
+                    [class "container pl-2 md:pl-6 lg:pl-10"]
                     pageView.body
                 :: [ indexViewFooter ]
             )

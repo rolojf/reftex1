@@ -1,5 +1,7 @@
 ---
 title: Interruptor del Compresor
+foto: 2
+apunte: True
 ---
 
 

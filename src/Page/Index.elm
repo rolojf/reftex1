@@ -112,17 +112,30 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    { title = "Listado Matón"
+    { title = "Listado Tablaros Revisados"
     , body =
-        [ Tuple.first static.data
-        , div [ class "pt-10"] <| List.map viewEntry <| Tuple.second static.data
-        ]
+        List.singleton
+            (div
+                [ class "md:flex md:flex-row md:gap-4 lg:gap-8" ]
+                [ div [ class "ms:w-64 flex-none"]
+                    [ div [ class "prose lg:prose-xl" ]
+                          [ Tuple.first static.data ]
+                    ]
+                , div [ class "" ]
+                    [ div
+                        [ class "w-full sm:grid sm:grid-flow-col sm:grid-rows-6 sm:gap-6 pt-20 pr-12" ]
+                      <|
+                        List.map viewEntry <|
+                            Tuple.second static.data
+                    ]
+                ]
+            )
     , menu =
-        [ ]
+        []
     }
 
 
 viewEntry : Entry -> Html msg
 viewEntry entry =
-    Html.article []
-        [ Route.link entry.route [] [ Html.text entry.title ] ]
+    Html.article [ class "bg-gray-700 lg:text-lg sm:text-orange-200 sm:text-center pt-5 px-3"]
+        [ Route.link entry.route [ ] [ Html.text entry.title ] ]
