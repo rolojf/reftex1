@@ -13,7 +13,7 @@ type alias Reporte =
 all : DataSource (List Reporte)
 all =
     Glob.succeed Reporte
-        |> Glob.match (Glob.literal "data/")
+        |> Glob.match (Glob.literal "public/")
         |> Glob.capture Glob.wildcard
         |> Glob.match (Glob.literal "/notas.md")
         |> Glob.captureFilePath

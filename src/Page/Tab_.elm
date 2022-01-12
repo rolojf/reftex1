@@ -49,25 +49,27 @@ routes =
                 (\reporte -> RouteParams reporte.slug)
             )
 
+
 type alias BodyAndFrontMatter =
-             { body: Html Never, title : String, fotos: Int, apunte: Bool }
+    { body : Html Never, title : String, fotos : Int, apunte : Bool }
+
 
 data : RouteParams -> DataSource Data
 data routeParams =
     let
         -- mdyBDecoder : String -> Decoder FrontMatter
         mdyBDecoder cuerpo =
-            Decode.map3 (BodyAndFrontMatter (MdConverter.renderea cuerpo ))
+            Decode.map3 (BodyAndFrontMatter (MdConverter.renderea cuerpo))
                 (Decode.field "title" Decode.string)
                 (Decode.field "foto" Decode.int)
                 (Decode.field "apunte" Decode.bool)
 
         getDataFromMD =
-            ("data/" ++ routeParams.tab ++ "/notas.md")
+            ("public/" ++ routeParams.tab ++ "/notas.md")
                 |> File.bodyWithFrontmatter mdyBDecoder
 
         getReportes =
-              DataSource.map
+            DataSource.map
                 Array.fromList
                 Folders.all
 
@@ -79,8 +81,9 @@ data routeParams =
 
 
 type alias Data =
-    { fMatter: BodyAndFrontMatter
-    , tabs : Array Folders.Reporte }
+    { fMatter : BodyAndFrontMatter
+    , tabs : Array Folders.Reporte
+    }
 
 
 head :
@@ -148,7 +151,56 @@ view maybeUrl sharedModel static =
     in
     { title = "Componente Revisado"
     , body =
-        [ static.data.fMatter.body
+        [ div
+            [ class "mt-6" ]
+            [ div
+                [ class "md:flex md:gap-4" ]
+                [ Html.img
+                    [ Attr.src <| static.routeParams.tab ++ "/1.jpg"
+                    , Attr.alt <| "Foto de " ++ static.data.fMatter.title
+                    , Attr.width 300
+                    ]
+                    []
+                , if static.data.fMatter.fotos >= 2 then
+                    Html.img
+                        [ class "mt-4"
+                        , Attr.src <| static.routeParams.tab ++ "/2.jpg"
+                        , Attr.alt <| "Foto de " ++ static.data.fMatter.title
+                        , Attr.width 300
+                        ]
+                        []
+
+                  else
+                    div [] []
+                , if static.data.fMatter.fotos == 3 then
+                    Html.img
+                        [ class "mt-4"
+                        , Attr.src <| static.routeParams.tab ++ "/3.jpg"
+                        , Attr.alt <| "Foto de " ++ static.data.fMatter.title
+                        , Attr.width 300
+                        ]
+                        []
+
+                  else
+                    div [] []
+                , if static.data.fMatter.apunte then
+                    div
+                        [ class "border-2 border-gray-500" ]
+                        [ Html.img
+                            [ Attr.src <| static.routeParams.tab ++ "/a.png"
+                            , Attr.alt <| "Foto de " ++ static.data.fMatter.title
+                            , Attr.width 500
+                            ]
+                            []
+                        ]
+
+                  else
+                    div [] []
+                ]
+            , div
+                [ class "prose lg:prose-xl" ]
+                [ static.data.fMatter.body ]
+            ]
         , text ("Tab_" ++ static.routeParams.tab)
         , indiceActual
             |> Debug.toString

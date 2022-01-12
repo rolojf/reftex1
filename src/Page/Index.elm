@@ -63,7 +63,7 @@ data =
     in
     DataSource.map2
         Tuple.pair
-        ("data/index.md"
+        ("public/index.md"
             |> File.bodyWithoutFrontmatter
             |> DataSource.map MdConverter.renderea
         )
