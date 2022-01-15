@@ -30,4 +30,4 @@ This is my post body
 | Un circuito por interruptor                  |        |      |
 | Estado de los componentes                    |        |      |
 
-si ****jala**** esto o pues si **no?** fucket.
+si ****jala**** esto o <span class="underline">pues</span> si **no?** fucket.
