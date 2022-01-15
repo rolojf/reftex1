@@ -1,16 +1,20 @@
----
-title: "Fusibles o Interruptor General"
-draft: false
-foto: 1
-apunte: true
----
+#+hugo_base_dir: ./
+#+OPTIONS: toc:nil
+#+hugo_front_matter_format: yaml
+#+hugo_level_offset: 0
 
-# Viendo la verdad
+* Fusibles o Interruptor General
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: fusibles
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte true
+:END:
 
+** Viendo la verdad
 This is my post body
 
 | Verificación                                 | Estado | Nota |
-|----------------------------------------------|--------|------|
+|----------------------------------------------+--------+------|
 | Acomodo del cable                            |        |      |
 | Calibres de cableado y medición de corriente |        |      |
 | Amperaje límite p/desconexión interruptores  |        |      |
@@ -30,4 +34,4 @@ This is my post body
 | Un circuito por interruptor                  |        |      |
 | Estado de los componentes                    |        |      |
 
-si ****jala**** esto o pues si **no?** fucket.
+si **jala** esto o pues si *no?* fucket.
