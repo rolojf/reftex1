@@ -74,13 +74,14 @@ showSpan clase children =
     in
     Html.span
         [ class clase ]
-        case children of
+        (case children of
             x :: rest ->
                  (List.append
                      (procesa1stChild x)
                      rest
                  )
             [] -> []
+        )
 
 
 
