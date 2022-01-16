@@ -1,6 +1,6 @@
 module MdConverter exposing (renderea)
 
-import Html as Html exposing (Html, div, text)
+import Html exposing (Html, div, text)
 import Html.Attributes as Attr exposing (class)
 import Markdown.Html
 import Markdown.Parser
@@ -42,11 +42,7 @@ myRenderer =
         defaultOne =
             Markdown.Renderer.defaultHtmlRenderer
     in
-    { defaultOne | html = htmls }
-
-
-
--- showDiv : String -> String -> Html Never
+    { defaultOne | html = fnProcHtml }
 
 
 showDiv : Maybe String -> Maybe String -> List (Html Never) -> Html Never
@@ -67,16 +63,29 @@ showDiv clase quienSoy children =
         ]
         children
 
-
 showSpan : String -> List (Html Never) -> Html Never
 showSpan clase children =
-    div
+    let
+        procesa1stChild child = [ child ]
+            {-case child of
+                (Html.p atributos conte) -> List.singleton (Html.p atributos conte)
+                otroChild -> List.singleton otroChild-}
+
+    in
+    Html.span
         [ class clase ]
-        children
+        case children of
+            x :: rest ->
+                 (List.append
+                     (procesa1stChild x)
+                     rest
+                 )
+            [] -> []
 
 
-htmls : Markdown.Html.Renderer (List (Html Never) -> Html Never)
-htmls =
+
+fnProcHtml : Markdown.Html.Renderer (List (Html Never) -> Html Never)
+fnProcHtml =
     Markdown.Html.oneOf
         [ Markdown.Html.tag "div"
             showDiv
