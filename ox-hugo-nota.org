@@ -1,7 +1,7 @@
 #+hugo_base_dir: ./
 #+OPTIONS: toc:nil
 #+hugo_front_matter_format: yaml
-#+hugo_level_offset: 0
+#+hugo_level_offset: 2
 
 * Fusibles o Interruptor General
 :PROPERTIES:
@@ -9,29 +9,419 @@
 :EXPORT_FILE_NAME: notas
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte true
 :END:
+** Importancia alta
 
-** Viendo la verdad
+*** Empates directos al suministro
+Hay dos cables rojos calibre 10 que están empatados directamente en el lado de suministro.  De por si los empates son un tema (ver nota 1).  Estos empates en particular es importante cambiarlos porque en caso de emergencia, cuando se tenga que apagar el interruptor general y apagar así toda la red eléctrica local, esos cables rojos puentean el interruptor general y seguirán teniendo tensión eléctrica.
+
+** Importancia media
+
+*** Fijación del conduit de suministro
+El tubo conduit donde baja el cableado para suministro de energía, está suelto, sin fijación.  Solamente sostenido por los mismos cables.  Corregir fijando el contuit con una abrazadera de uña u abrazadera omega.
+
+** Importancia Baja
+*** Estructura obstruye
+Hay una estructura que dificulta la remoción de la tapa del interruptor. En caso de una emergencia, el proceso de remoción lleva más tiempo del normal.
+*** Mejorar el acomodo(peinado) de cables
+#+INCLUDE: "./ox-hugo-nota.org::*nota de empates" :only-contents t
+
+** Otras observaciones
+*** Hay empates del cableado que baja de la subestación
+No alcanzó el cable y pusieron un conector bi-partido para hacer empates. Los conectores bipartidos son más confiables.
+
+*** Mediciones de Corriente y Calibre del Cableado
+#+INCLUDE: "./ox-hugo-nota.org::*calibre" :only-contents t
+
+** Notas
+*** Nota 1 Sobre los empates
+#+INCLUDE: "./ox-hugo-nota.org::*peinado" :only-contents t
+
+
+* Interruptor AccuTherm
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: acutherm
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+
+** Uno
 This is my post body
 
-| Verificación                                 | Estado | Nota |
-|----------------------------------------------+--------+------|
-| Acomodo del cable                            |        |      |
-| Calibres de cableado y medición de corriente |        |      |
-| Amperaje límite p/desconexión interruptores  |        |      |
-| Saturación y acomodo (peinado) de cables     |        |      |
-| Falsos contactos y/o puntos calientes        |        |      |
-| Suciedad / Limpieza                          |        |      |
-| Fijación                                     |        |      |
-| Aislamiento                                  |        |      |
-| Empates o conexiones improvisadas            |        |      |
-| Tubos o mangueras de cableado                |        |      |
-| Conexiones de tubos o mangueras de cableado  |        |      |
-| Hermeticidad de la caja o tablero (Nema)     |        |      |
-| Convención de colores del cableado           |        |      |
-| Identificación del tablero                   |        |      |
-| Identificación de los interruptores          |        |      |
-| Identificación de cableados y destinos       |        |      |
-| Un circuito por interruptor                  |        |      |
-| Estado de los componentes                    |        |      |
 
-si **jala** esto o _pues_ si *no?* fucket.
+* Interruptor Atom 1
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: atom1
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Atom 2
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: atom2
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+
+** Uno
+This is my post bodyn
+
+
+* Cableado por Canaleta
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: canaleta
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Centro de Carga 1
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ccarga1
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 3 :apunte true
+:END:
+** Importancia alta
+*** Mejorar el acomodo(peinado) de cables
+#+INCLUDE: "./ox-hugo-nota.org::*peinado" :only-contents t
+
+** Importancia media
+*** No se sigue la convención de colores de cables
+Particularmente, cables que se conectan directo a los cables de suministro, directo (sin interruptor), para alimentación de otro centro de carga o interruptor, son de color blanco que no corresponde. Ver nota 3. 
+
+** Importancia baja
+*** Hay empates del cableado en suministro
+No alcanzó el cable y pusieron un empate tipo conector bipartidos. (ver nota 1)
+
+*** Revisión a la identificar los interruptores
+Con una impresora de etiquetas, previamente confirmar que circuito apaga cada interruptor.
+
+** Otras observaciones
+*** Se detectó pastilla de iluminación botada
+Se corrigió problema en interruptor de control de iluminación que presentó corto temporalmente y se botó la pastilla. Se corrigió ésto.
+
+*** Se hizo mediciones de Corriente y corresponde al Calibre del Cableado
+#+INCLUDE: "./ox-hugo-nota.org::*calibre" :only-contents t
+
+*** Se revisó el dimensionamiento de los interruptores termo-magnéticos
+Las mediciones de corriente estaban muy bajas y la capacidad de los interruptores estaba conforme al calibre de los cables. Ver nota 2.
+
+** Notas
+*** Nota 1 Sobre los empates
+#+INCLUDE: "./ox-hugo-nota.org::*nota de empates" :only-contents t
+
+*** Nota 2 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*ampere exp" :only-contents t
+
+*** Nota 3 Sobre los colores del cableado
+#+INCLUDE: "./ox-hugo-nota.org::*colores" :only-contents t
+
+
+* Centro de Carga 2
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ccarga2
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Importancia alta
+*** Se conectan dos circuitos por interruptor (pastilla)
+Cada circuito debe tener su propio interruptor.  Ya no hay suficiente espacio en ese centro de carga.  Se recomienda instalar un centro de carga adicional cerca para corregir.
+
+** Importancia media
+*** El tubo conduit de suministro no está fijo a la centro de carga
+No fue instalado fijo con contra-tuerca como debe ser.
+
+*** No se sigue la convención de colores de cables
+Particularmente, el neutro debe ser blanco y está verde (tierra física)
+
+** Importancia baja
+*** Falta identificar el circuito de cada interruptor
+Con una impresora de etiquetas, previamente confirmar que circuito apaga cada interruptor.
+
+*** Centro de carga no aterrizado
+#+INCLUDE: "./ox-hugo-nota.org::*aterrizado" :only-contents t
+
+*** Mejorar el acomodo(peinado) de cables
+#+INCLUDE: "./ox-hugo-nota.org::*peinado" :only-contents t
+
+** Otras observaciones
+*** Se detectó pastilla de iluminación botada
+Se corrigió problema en interruptor de control de iluminación que presentó corto temporalmente y se botó la pastilla. Se corrigió ésto.
+
+*** Se hizo mediciones de Corriente y corresponde al Calibre del Cableado
+#+INCLUDE: "./ox-hugo-nota.org::*calibre" :only-contents t
+
+*** Se revisó el dimensionamiento de los interruptores termo-magnéticos
+Las mediciones de corriente estaban muy bajas y la capacidad de los interruptores estaba conforme al calibre de los cables. Ver nota 2.
+
+** Notas
+*** Nota 2 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*ampere exp" :only-contents t
+
+*** Nota 3 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*colores" :only-contents t
+
+
+
+* Centro de Carga 3
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ccarga3
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Centro de Carga 4
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ccarga4
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Centro de Carga 5
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ccarga5
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Centro de Carga 6
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ccarga6
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor del compresor
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: compresor
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Dispersor
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: dispersor
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Horno - Transportadora
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: horno
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 3 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor 1
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: interruptor1
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor 2
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: interruptor2
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor 3
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: interruptor3
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor 4
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: interruptor4
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor 5
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: interruptor5
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor 6
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: interruptor5
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte false
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Polipasto
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: polip
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Mesa de Trabajo 1
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: poste1
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Mesa de Trabajo 2
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: poste2
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Mesa de Trabajo 3
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: poste3
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Prensa Atom 2
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: prensa-atom2
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Interruptor Sotano
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: sotano
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 3 :apunte true
+:END:
+** Uno
+This is my post body
+
+
+* Textos
+*** peinado
+Como parte del proceso de mantenimiento y mejora a un centro de carga, tablero o caja de interruptor. El acomodo de los cables que sigan una trayectoria ordenada, directa y clara desde el punto de entrada al interruptor.  Representa normalmente recortar cables de tamaño excesivo.  Si algún cable está corto y tiene un empate, a lo mejor se puede reubicar  el interruptor para para evitar el empate. Poner sinchos para agrupar los cables. Con el objetivo de tener claridad de que cable conecta que y espacio para trabajar en caso de requerirse. Se conoce normalmente como peinado de cables.
+
+*** calibre
+La revisión de corriente por cada cable conductor, es con el objeto de detectar si hay riesgos de corto o riesgo de que el cable se funda. Esto podría suceder si la corriente eléctrica medida supera o está cerca del límite de corriente aceptable según el calibre de cada cable.
+
+*** ampere exp
+Los interruptores termo-magnéticos tienen una capacidad de máxima de corriente donde puede cortar o interrumpir el flujo elécrico y si se supera ese máximo de corriente automáticamente el circuito se abre (se corta). La capacidad máxima debe ser dimensionado según las especificaciones del equipo a operar con el consumo eléctrico del circuito o bien que sea según la corriente máxima segura del calibre del cableado eléctrico.
+
+*** aterrizado
+Falta poner tierra física al centro de carga para aterrizar el gabineta.  Es una precaución requerida para evitar descargas eléctricas. 
+
+
+*** falsos
+Falsos contactos y/o puntos calientes
+
+*** suciedad
+Suciedad / Limpieza
+
+*** fijación
+Fijación
+
+*** aislamiento
+**** Hallazgo corregido: Cableado sin aislamiento
+Se detectó cableado sin aislamiento o forro. Normalmente se debe a descuido en instalaciones previas. Representa un riesgo de corto o descarga eléctrica para personas que tenga contacto con el gabinete del tablero.  Esta situación, ya fue corregida con cinta de aislar durante el proceso de revisión.
+
+*** nota de empates
+Los empates o conexiones improvisadas deben evitarse. Normalmente se realizan cuando el largo del cable no alcanza el punto de conexión y se adiciona un tramo de cable para extender el largo.  Estos son punto de alta probabilidad de falla porque quedan falsos contactos que generan puntos calientes, o cortos por falla el aislamiento. Lo ideal es cambiar el cable o si no fuera costo conveniente, soldar los empates.
+
+*** tubos
+Tubos o mangueras de cableado
+
+*** contratuerca
+Conexiones de tubos o mangueras de cableado
+
+*** nema
+Hermeticidad de la caja o tablero (Nema)
+
+*** colores
+La convención de colores establece ciertos colores dependiendo si el cable lleva voltaje o no, y su uso. En la corriente alterna, los colores de líneas vivas (fases con voltaje) los cables deben ser color negro o en su defecto color rojo.
+El color blanco corresponde al neutro, no debe llevar voltaje.
+El cable color verde corresponde a tierra física y no debe llevar tensión eléctrica (voltaje).
+
+*** tablero
+Identificación del tablero
+
+*** id
+Identificación de los interruptores
+
+*** contractil
+Identificación de cableados y destinos
+
+*** doble
+Un circuito por interruptor
+
+*** estado
+Estado de los componentes
+* Interruptor Thermoformado
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: themoform
+:EXPORT_FILE_NAME: notas
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 3 :apunte true
+:END:
+** Uno
+This is my post body
+
+
