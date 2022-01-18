@@ -201,12 +201,6 @@ view maybeUrl sharedModel static =
                 [ class "prose lg:prose-xl" ]
                 [ static.data.fMatter.body ]
             ]
-        , text ("Tab_" ++ static.routeParams.tab)
-        , indiceActual
-            |> Debug.toString
-            |> text
-            |> List.singleton
-            |> div []
         ]
     , menu =
         [ View.Liga
