@@ -14,7 +14,8 @@ import OptimizedDecoder as Decode exposing (Decoder)
 import Page exposing (Page, PageWithState, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
-import Route
+import Path exposing (Path)
+import Route exposing (Route)
 import Shared
 import View exposing (View)
 
@@ -148,6 +149,19 @@ view maybeUrl sharedModel static =
 
             else
                 indiceActual - 1
+
+        srcFromPath archivo =
+            static.path
+                |> Path.toSegments
+                |> (\agregado segmentos ->
+                        List.append
+                            segmentos
+                            (List.singleton agregado)
+                   )
+                    archivo
+                |> Path.join
+                |> Path.toAbsolute
+                |> Attr.src
     in
     { title = "Componente Revisado"
     , body =
@@ -156,7 +170,7 @@ view maybeUrl sharedModel static =
             [ div
                 [ class "md:flex md:gap-4" ]
                 [ Html.img
-                    [ Attr.src <| static.routeParams.tab ++ "/1.jpg"
+                    [ srcFromPath "/1.jpg"
                     , Attr.alt <| "Foto de " ++ static.data.fMatter.title
                     , Attr.width 300
                     ]
@@ -164,7 +178,7 @@ view maybeUrl sharedModel static =
                 , if static.data.fMatter.fotos >= 2 then
                     Html.img
                         [ class "mt-4"
-                        , Attr.src <| static.routeParams.tab ++ "/2.jpg"
+                        , srcFromPath "/2.jpg"
                         , Attr.alt <| "Foto de " ++ static.data.fMatter.title
                         , Attr.width 300
                         ]
@@ -175,7 +189,7 @@ view maybeUrl sharedModel static =
                 , if static.data.fMatter.fotos == 3 then
                     Html.img
                         [ class "mt-4"
-                        , Attr.src <| static.routeParams.tab ++ "/3.jpg"
+                        , srcFromPath "/3.jpg"
                         , Attr.alt <| "Foto de " ++ static.data.fMatter.title
                         , Attr.width 300
                         ]
