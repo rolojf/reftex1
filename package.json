@@ -4,8 +4,8 @@
     "postinstall": "elm-tooling install",
     "elm": "elm-pages dev",
     "build": "tailwindcss -o public/tailwind.css --minify && elm-pages build",
-    "tail": "tailwindcss -o public/tailwind.css",
-    "dev": "concurrently \"elm-pages dev\" \"tailwindcss -o public/tailwind.css --watch \"",
+    "tail": "tailwindcss -i public/input.css -o public/tailwind.css",
+    "dev": "concurrently \"elm-pages dev\" \"tailwindcss -i public/input.css -o public/tailwind.css --watch \"",
     "server": "python -m http.server 8888 --bind localhost --directory dist",
     "deplora": "aws s3 sync ./dist s3://redcentralfoams.reftex.com --delete"
   },

@@ -187,7 +187,7 @@ This is my post body
 This is my post body
 
 
-* Centro de Carga 5
+* centro de Carga 5
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: ccarga5
 :EXPORT_FILE_NAME: notas
