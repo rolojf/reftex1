@@ -17,5 +17,7 @@ Reporte con los hallazgos.  Este es el reporte.
 ### Otros
 **Fecha del Servicio:**  Diciembre 2021
 
+**Nota: ** Para observar mejor las fotografías, en el navegador con el botón derecho del ratón, selecciona la opción de abrir la imagen en una nueva pestaña.
+
 
 [Cotización Original](./CotizJServ-Elec1.pdf "Va pues")

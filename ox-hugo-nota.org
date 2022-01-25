@@ -57,7 +57,7 @@ This is my post body
 ** Uno
 This is my post body
 
-
+ 
 * Interruptor Atom 2
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: atom2
@@ -173,8 +173,39 @@ Las mediciones de corriente estaban muy bajas y la capacidad de los interruptore
 :EXPORT_FILE_NAME: notas
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
 :END:
-** Uno
-This is my post body
+** Nada urgente encontrado
+
+** Importancia baja
+*** Falta identificar el circuito de cada interruptor
+Con una impresora de etiquetas, previamente confirmar que circuito apaga cada interruptor.
+
+
+*** Dos interruptores termomagnéticos desconectados
+Sin uso están dos interruptores de 220v en el gabinete.
+
+
+*** Aterrizado del gabinete
+En este centro de carga si está aterrizado el gabinete, pero de manera improvisada y con calibre muy pequeño. La norma indca que el calibre debe ser conforme al calibra más amplio en uso.
+
+
+** Otras observaciones
+*** Se detectó pastilla de iluminación botada
+Se corrigió problema en interruptor de control de iluminación que presentó corto temporalmente y se botó la pastilla. Se corrigió ésto.
+
+*** Se hizo mediciones de Corriente y corresponde al Calibre del Cableado
+#+INCLUDE: "./ox-hugo-nota.org::*calibre" :only-contents t
+
+*** Se revisó el dimensionamiento de los interruptores termo-magnéticos
+Las mediciones de corriente estaban muy bajas y la capacidad de los interruptores estaba conforme al calibre de los cables. Ver nota 2.
+
+
+** Notas
+*** Nota 2 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*ampere exp" :only-contents t
+
+*** Nota 3 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*colores" :only-contents t
+
 
 
 * Centro de Carga 4
@@ -183,8 +214,52 @@ This is my post body
 :EXPORT_FILE_NAME: notas
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 2 :apunte true
 :END:
-** Uno
-This is my post body
+** Importancia alta
+*** Se conectan dos o tres circuitos por interruptor (pastilla de 110)
+Cada circuito debe tener su propio interruptor.  Ya no hay suficiente espacio en ese centro de carga.  Se recomienda instalar un centro de carga adicional cerca para corregir.
+
+*** Conectados tres circuitos a interruptor trifásico
+Cada circuito debe tener su propio interruptor.  Ya no hay suficiente espacio en ese centro de carga.  Se recomienda instalar un centro de carga adicional cerca para corregir.
+
+
+** Importancia media
+*** El tubo conduit de suministro no está fijo a la centro de carga
+No fue instalado fijo con contra-tuerca como debe ser. Por tanto no está sellado el centro de carga.
+Tampoco está sellado a la entrada de la manguera.
+
+** Importancia baja
+*** Falta identificar el circuito de cada interruptor
+Con una impresora de etiquetas, previamente confirmar que circuito apaga cada interruptor.
+
+*** Centro de carga no aterrizado
+#+INCLUDE: "./ox-hugo-nota.org::*aterrizado" :only-contents t
+
+*** No se sigue la convención de colores de cables
+Particularmente, cables que se conectan directo a los cables de suministro, directo (sin interruptor), para alimentación de otro centro de carga o interruptor, son de color blanco que no corresponde. Ver nota 3. 
+
+*** La manguera de suministro está no está sellada
+
+
+** Otras observaciones
+*** Se detectaron cables sin conectar expuesto para un corto.
+Esto fue corregido durante la instalación.
+
+*** Se hizo mediciones de Corriente y corresponde al Calibre del Cableado
+#+INCLUDE: "./ox-hugo-nota.org::*calibre" :only-contents t
+
+*** Se revisó el dimensionamiento de los interruptores termo-magnéticos
+Las mediciones de corriente estaban muy bajas y la capacidad de los interruptores estaba conforme al calibre de los cables. Ver nota 2.
+
+** Notas
+*** Nota 1 Sobre los colores del cableado
+#+INCLUDE: "./ox-hugo-nota.org::*colores" :only-contents t
+
+*** Nota 2 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*ampere exp" :only-contents t
+
+*** Nota 3 Sobre los interruptores termomagnéticos
+#+INCLUDE: "./ox-hugo-nota.org::*colores" :only-contents t
+
 
 
 * centro de Carga 5
@@ -203,8 +278,25 @@ This is my post body
 :EXPORT_FILE_NAME: notas
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :foto 1 :apunte true
 :END:
-** Uno
-This is my post body
+
+** Importancia media
+*** Centro de carga no aterrizado
+#+INCLUDE: "./ox-hugo-nota.org::*aterrizado" :only-contents
+
+*** No se observa ningún cable conectado a neutro
+Los circuitos conectados toman de los interruptores la línea con voltaje.  Para cerrar un circuito y encender una luz o maquinas se requiere mínimo otro cable al neutro.  Al no haber cables neutros conectados, como se observa en este centro de carga, los circuitos de estos interruptores no están tomando el neutro y seguramente lo están tomando de un empate en algún otro lado, fuera del centro de carga.
+
+
+*** El centro de carga para 220v solo conectado como 110v
+Centro de carga está sub-utilizado.
+Solo están conectados una fase y hay posibilidades de conectar tres interruptores más.
+
+
+** Importancia baja
+*** La manguera de suministro está no está sellada
+
+*** La tubería de entrada es de pared delgada
+En instalaciones donde hay riesgo de incendio, se usa tubería de pared gruesa que se conecta con rosca.
 
 
 * Interruptor del compresor

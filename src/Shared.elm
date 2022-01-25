@@ -135,21 +135,26 @@ indexViewFooter =
     let
         viewPieNavega : List (Html msg)
         viewPieNavega =
-            [ Footer.ligaAlPie "#" "About"
-            , Footer.ligaAlPie "#" "Blog"
-            , Footer.ligaAlPie "#" "Jobs"
-            , Footer.ligaAlPie "#" "Press"
-            , Footer.ligaAlPie "#" "Accesibility"
-            , Footer.ligaAlPie "#" "Partners"
-            ]
+            []
 
+        {- Footer.ligaAlPie "#" "About"
+           , Footer.ligaAlPie "#" "Blog"
+           , Footer.ligaAlPie "#" "Jobs"
+           , Footer.ligaAlPie "#" "Press"
+           , Footer.ligaAlPie "#" "Accesibility"
+           , Footer.ligaAlPie "#" "Partners"
+           ]
+        -}
         viewPieSocialIcons : List (Html msg)
         viewPieSocialIcons =
-            [ Footer.ligaIcono "github.com" "GitHub" Footer.Github
-            , Footer.ligaIcono "linkedin.com" "LinkedIn" Footer.LinkedIn
-            , Footer.ligaIcono "whatsapp.com" "Whatsapp" Footer.WhatsApp
-            , Footer.ligaIcono "correo.com" "Correo" Footer.Email
-            ]
+            []
+
+        {- Footer.ligaIcono "github.com" "GitHub" Footer.Github
+           , Footer.ligaIcono "linkedin.com" "LinkedIn" Footer.LinkedIn
+           , Footer.ligaIcono "whatsapp.com" "Whatsapp" Footer.WhatsApp
+           , Footer.ligaIcono "correo.com" "Correo" Footer.Email
+           ]
+        -}
     in
     Footer.viewFooter
         viewPieNavega
