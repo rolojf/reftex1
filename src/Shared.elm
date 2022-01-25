@@ -126,7 +126,7 @@ view sharedData page model toMsg pageView =
                 |> Html.map toMsg
              )
                 :: div
-                    [class "container pl-2 md:pl-6 lg:pl-10"]
+                    [ class "container pl-2 md:pl-6 lg:pl-10" ]
                     pageView.body
                 :: [ indexViewFooter ]
             )
@@ -215,6 +215,8 @@ myNav modelo getMenu =
                         , Tw.pb_3
                         , Tw.space_y_1
                         , TwBp.sm [ Tw.px_3 ]
+                        , Tw.flex
+                        , Tw.flex_col
                         ]
                     ]
                     (ligasChulas True <| getMenu)
