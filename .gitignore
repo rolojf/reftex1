@@ -7,3 +7,4 @@ functions/render/elm-pages-cli.js
 /public/tailwind.css
 /.vscode/
 public/tailwind.css
+/public/*/notas.md
