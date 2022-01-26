@@ -6,7 +6,7 @@
     "build": "tailwindcss -i public/input.css -o public/tailwind.css --minify && elm-pages build",
     "tail": "tailwindcss -i public/input.css -o public/tailwind.css",
     "dev": "concurrently \"elm-pages dev\" \"tailwindcss -i public/input.css -o public/tailwind.css --watch \"",
-    "server": "python -m http.server 8888 --bind localhost --directory dist",
+    "server": "python -m http.server 8765 --bind 127.0.0.13 --directory dist",
     "deplora": "aws s3 sync ./dist s3://redcentralfoams.reftex.com --delete"
   },
   "devDependencies": {
