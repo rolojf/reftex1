@@ -15,8 +15,6 @@ import Route exposing (Route)
 import SharedTemplate exposing (SharedTemplate)
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr
-import Tailwind.Breakpoints as TwBp
-import Tailwind.Utilities as Tw
 import View exposing (View)
 
 
@@ -194,14 +192,11 @@ myNav modelo getMenu =
         myHiddenMenu : Html Msg
         myHiddenMenu =
             div
-                [ class <|
-                    "md:hidden "
-                        ++ (if modelo.showMobileMenu then
-                                "block"
+                [ if modelo.showMobileMenu then
+                              class "md:hidden block"
 
                             else
-                                "hidden"
-                           )
+                              class "hidden"
                 ]
                 [ div
                     [ class "px-2 pt-2 pb-3 space-y-1 sm:px-3 sm:flex sm:flex-col" ]
