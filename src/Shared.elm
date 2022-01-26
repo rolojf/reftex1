@@ -37,7 +37,6 @@ type Msg
         }
     | SharedMsg SharedMsg
     | ToggleMobileMenu
-    | ToggleProfileMenu
 
 
 type alias Data =
@@ -49,9 +48,7 @@ type SharedMsg
 
 
 type alias Model =
-    { showMobileMenu : Bool
-    , showProfileMenu : Bool
-    }
+    { showMobileMenu : Bool }
 
 
 init :
@@ -69,9 +66,7 @@ init :
             }
     -> ( Model, Cmd Msg )
 init navigationKey flags maybePagePath =
-    ( { showMobileMenu = False
-      , showProfileMenu = False
-      }
+    ( { showMobileMenu = False }
     , Cmd.none
     )
 
@@ -87,9 +82,6 @@ update msg model =
 
         ToggleMobileMenu ->
             ( { model | showMobileMenu = not model.showMobileMenu }, Cmd.none )
-
-        ToggleProfileMenu ->
-            ( { model | showProfileMenu = not model.showProfileMenu }, Cmd.none )
 
 
 subscriptions : Path -> Model -> Sub Msg
@@ -116,7 +108,7 @@ view sharedData page model toMsg pageView =
     { body =
         div
             []
-            ((myNav model pageView.menu
+            ((myNav model.showMobileMenu pageView.menu
                 |> Html.map toMsg
              )
                 :: div
@@ -161,10 +153,10 @@ indexViewFooter =
 
 
 myNav :
-    Model
+    Bool
     -> List View.Liga
     -> Html Msg
-myNav modelo getMenu =
+myNav verMenuMovil getMenu =
     let
         myLogoAndLinks : Html Msg
         myLogoAndLinks =
@@ -182,26 +174,25 @@ myNav modelo getMenu =
                     ]
                 , div
                     -- LIGAS DE NAVEGACION
-                    [ class "hidden, md:block" ]
+                    [ class "hidden md:block" ]
                     [ div
                         [ class "ml-10 flex items-baseline space-x-4" ]
                         (ligasChulas False getMenu)
                     ]
                 ]
 
-        myHiddenMenu : Html Msg
-        myHiddenMenu =
-            div
-                [ if modelo.showMobileMenu then
-                              class "md:hidden block"
+        myHiddenMenu : Bool -> Html Msg
+        myHiddenMenu verMenu =
+            if verMenu then
+                div
+                    [ class "md:hidden block" ]
+                    [ div
+                        [ class "px-2 pt-2 pb-3 space-y-1 sm:px-3 sm:flex sm:flex-col" ]
+                        (ligasChulas True getMenu)
+                    ]
 
-                            else
-                              class "hidden"
-                ]
-                [ div
-                    [ class "px-2 pt-2 pb-3 space-y-1 sm:px-3 sm:flex sm:flex-col" ]
-                    (ligasChulas True getMenu)
-                ]
+            else
+                div [] []
 
         ligasChulas : Bool -> List View.Liga -> List (Html Msg)
         ligasChulas showMobileLinks menus =
@@ -235,7 +226,7 @@ myNav modelo getMenu =
                 )
                 menus
 
-        heroiconOutlineMenu : Html.Html Msg
+        heroiconOutlineMenu : Html Msg
         heroiconOutlineMenu =
             div
                 [ class "h-6 w-6 block" ]
@@ -277,8 +268,8 @@ myNav modelo getMenu =
                     ]
                 ]
 
-        mobileMenuButton : Html Msg
-        mobileMenuButton =
+        mobileMenuButton : Bool -> Html Msg
+        mobileMenuButton showMMenu =
             div
                 [ class "-mr-2 flex md:hidden" ]
                 [ Html.button
@@ -287,10 +278,10 @@ myNav modelo getMenu =
                     ]
                     [ Html.span
                         [ class "sr-only" ]
-                        [ text "Open main menu" ]
+                        [ text "Abrir el menú principal" ]
                     , Html.span
                         []
-                        [ if modelo.showMobileMenu then
+                        [ if showMMenu then
                             heroiconOutlineX
 
                           else
@@ -306,8 +297,8 @@ myNav modelo getMenu =
             [ div
                 [ class "flex items-center justify-between h-16" ]
                 [ myLogoAndLinks
-                , mobileMenuButton
+                , mobileMenuButton verMenuMovil
                 ]
             ]
-        , myHiddenMenu
+        , myHiddenMenu verMenuMovil
         ]
